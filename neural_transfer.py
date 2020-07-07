@@ -9,17 +9,16 @@ import PIL.Image
 import time
 import functools
 
-def tensor_to_image(tensor):
-  tensor = tensor*255
-  tensor = np.array(tensor, dtype=np.uint8)
-  if np.ndim(tensor)>3:
-    assert tensor.shape[0] == 1
-    tensor = tensor[0]
-  return PIL.Image.fromarray(tensor)
+# def tensor_to_image(tensor):
+#   tensor = tensor*255
+#   tensor = np.array(tensor, dtype=np.uint8)
+#   # if np.ndim(tensor)>3:
+#   #   assert tensor.shape[0] == 1
+#   #   tensor = tensor[0]
+#   # return PIL.Image.fromarray(tensor)
+#   return tensor
 
 content_path = tf.keras.utils.get_file('YellowLabradorLooking_new.jpg', 'https://storage.googleapis.com/download.tensorflow.org/example_images/YellowLabradorLooking_new.jpg')
-
-# https://commons.wikimedia.org/wiki/File:Vassily_Kandinsky,_1913_-_Composition_7.jpg
 style_path = tf.keras.utils.get_file('kandinsky5.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky%2C_1913_-_Composition_7.jpg')
 
 def load_img(path_to_img):
@@ -46,17 +45,24 @@ def imshow(image, title=None):
   if title:
     plt.title(title)
 
-content_image = load_img(content_path)
-style_image = load_img(style_path)
+def generate():
+  content_image = load_img(content_path)
+  style_image = load_img(style_path)
 
-plt.subplot(1, 2, 1)
-imshow(content_image, 'Content Image')
+  plt.subplot(1, 2, 1)
+  imshow(content_image, 'Content Image')
 
-plt.subplot(1, 2, 2)
-imshow(style_image, 'Style Image')
+  plt.subplot(1, 2, 2)
+  imshow(style_image, 'Style Image')
 
-import tensorflow_hub as hub
-hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/1')
-stylized_image = hub_module(tf.constant(content_image), tf.constant(style_image))[0]
-# tensor_to_image(stylized_image)
-print(stylized_image)
+  import tensorflow_hub as hub
+  hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/1')
+  stylized_image = hub_module(tf.constant(content_image), tf.constant(style_image))[0]
+  # stylized_image = tensor_to_image(stylized_image)
+  # print(stylized_image)
+  # return (np.array(style_image)).tolist()
+  return stylized_image
+
+# if __name__ == "__main__":
+#     style_image = generate()
+#     print(style_image)
