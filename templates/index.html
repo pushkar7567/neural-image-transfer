@@ -2,6 +2,22 @@
 
 
 {% block body %}
-    Neural style transfer!
-    {{ generated_image }}
+    <div>
+        <div style="text-align: center;">
+            <h1>Neural style transfer</h1>
+        </div>
+        <form method='POST' action="/view-image" enctype="multipart/form-data">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="contentfile" name="contentfile">
+                <label class="custom-file-label" for="contentfile">Please select your content file</label>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="stylefile" name="stylefile">
+                <label class="custom-file-label" for="stylefile">Please select your style file</label>
+            </div>
+            <div class="button">
+                <input type="submit" class="btn btn-secondary" value="Submit">
+            </div>
+        </form>
+    </div>
 {% endblock %}

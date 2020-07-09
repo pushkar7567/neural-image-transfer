@@ -3,11 +3,15 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 mpl.rcParams['figure.figsize'] = (12,12)
 mpl.rcParams['axes.grid'] = False
+import os
 
 import numpy as np
 import PIL.Image
 import time
 import functools
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(APP_ROOT, 'img')
 
 # def tensor_to_image(tensor):
 #   tensor = tensor*255
@@ -18,8 +22,12 @@ import functools
 #   # return PIL.Image.fromarray(tensor)
 #   return tensor
 
-content_path = tf.keras.utils.get_file('YellowLabradorLooking_new.jpg', 'https://storage.googleapis.com/download.tensorflow.org/example_images/YellowLabradorLooking_new.jpg')
-style_path = tf.keras.utils.get_file('kandinsky5.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky%2C_1913_-_Composition_7.jpg')
+# content_path = tf.keras.utils.get_file('YellowLabradorLooking_new.jpg', 'https://storage.googleapis.com/download.tensorflow.org/example_images/YellowLabradorLooking_new.jpg')
+# style_path = tf.keras.utils.get_file('kandinsky5.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky%2C_1913_-_Composition_7.jpg')
+# content_path = "/Users/Pushkar/Downloads/IMG_1521.JPG"
+content_path = os.path.join(UPLOAD_FOLDER, "contentfile.png")
+style_path = os.path.join(UPLOAD_FOLDER, "stylefile.png")
+print(content_path)
 
 def load_img(path_to_img):
   max_dim = 512
