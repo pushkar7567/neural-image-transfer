@@ -13,18 +13,6 @@ import functools
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'img')
 
-# def tensor_to_image(tensor):
-#   tensor = tensor*255
-#   tensor = np.array(tensor, dtype=np.uint8)
-#   # if np.ndim(tensor)>3:
-#   #   assert tensor.shape[0] == 1
-#   #   tensor = tensor[0]
-#   # return PIL.Image.fromarray(tensor)
-#   return tensor
-
-# content_path = tf.keras.utils.get_file('YellowLabradorLooking_new.jpg', 'https://storage.googleapis.com/download.tensorflow.org/example_images/YellowLabradorLooking_new.jpg')
-# style_path = tf.keras.utils.get_file('kandinsky5.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky%2C_1913_-_Composition_7.jpg')
-# content_path = "/Users/Pushkar/Downloads/IMG_1521.JPG"
 content_path = os.path.join(UPLOAD_FOLDER, "contentfile.png")
 style_path = os.path.join(UPLOAD_FOLDER, "stylefile.png")
 print(content_path)
@@ -66,11 +54,4 @@ def generate():
   import tensorflow_hub as hub
   hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/1')
   stylized_image = hub_module(tf.constant(content_image), tf.constant(style_image))[0]
-  # stylized_image = tensor_to_image(stylized_image)
-  # print(stylized_image)
-  # return (np.array(style_image)).tolist()
   return stylized_image
-
-# if __name__ == "__main__":
-#     style_image = generate()
-#     print(style_image)
