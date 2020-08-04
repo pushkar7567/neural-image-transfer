@@ -45,13 +45,13 @@ def generate():
   content_image = load_img(content_path)
   style_image = load_img(style_path)
 
-  plt.subplot(1, 2, 1)
-  imshow(content_image, 'Content Image')
+  # plt.subplot(1, 2, 1)
+  # imshow(content_image, 'Content Image')
 
-  plt.subplot(1, 2, 2)
-  imshow(style_image, 'Style Image')
+  # plt.subplot(1, 2, 2)
+  # imshow(style_image, 'Style Image')
 
   import tensorflow_hub as hub
-  hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/1')
+  hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
   stylized_image = hub_module(tf.constant(content_image), tf.constant(style_image))[0]
   return stylized_image
