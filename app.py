@@ -30,13 +30,12 @@ def result():
     img.save(file_object, 'PNG')
     file_object.seek(0)
     return send_file(file_object, mimetype='image/PNG')
-    # return "LETS GO"
 
 @app.route('/view-image', methods=["GET", "POST"])
 def uploaded_image():
     if request.method == 'POST':
         if request.files:
-            print(" I have files")
+            print("Files Inserted")
             contentfile = request.files["contentfile"]
             stylefile = request.files["stylefile"]
             content_filename = os.path.join(UPLOAD_FOLDER, 'contentfile.png')
@@ -45,5 +44,4 @@ def uploaded_image():
             stylefile.save(style_filename)
             print("Image saved")
             return redirect("/result")
-            # return render_template("index.html")
     return render_template("index.html")
