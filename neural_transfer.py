@@ -1,14 +1,15 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-mpl.rcParams['figure.figsize'] = (12,12)
-mpl.rcParams['axes.grid'] = False
 import os
 import tensorflow_hub as hub
 import numpy as np
 import PIL.Image
 import time
 import functools
+
+mpl.rcParams['figure.figsize'] = (12,12)
+mpl.rcParams['axes.grid'] = False
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT, 'img')
