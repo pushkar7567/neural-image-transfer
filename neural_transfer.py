@@ -4,7 +4,7 @@ import matplotlib as mpl
 mpl.rcParams['figure.figsize'] = (12,12)
 mpl.rcParams['axes.grid'] = False
 import os
-
+import tensorflow_hub as hub
 import numpy as np
 import PIL.Image
 import time
@@ -50,8 +50,6 @@ def generate():
 
   # plt.subplot(1, 2, 2)
   # imshow(style_image, 'Style Image')
-
-  import tensorflow_hub as hub
   hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
   stylized_image = hub_module(tf.constant(content_image), tf.constant(style_image))[0]
   return stylized_image
